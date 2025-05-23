@@ -1,0 +1,142 @@
+﻿@using BlogCore.Models.ViewModels
+@model UsuarioVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte General</title>
+
+    <!-- Bootswatch Lux Theme -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-size: 0.95rem;
+            background-color: #f8f9fa;
+        }
+
+        h3, h4 {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .table th, .table td {
+            vertical-align: middle !important;
+        }
+
+        .metric-card {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+            .metric-card:hover {
+                transform: scale(1.03);
+            }
+
+        .section-title i {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5 mb-5">
+        <div class="card border-0 shadow-lg">
+            <div class="card-header bg-primary text-white text-center">
+                <h3 class="mb-0">
+                    <i class="fas fa-chart-bar me-2"></i>
+                    Reporte General
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <!-- Métricas -->
+                <div class="row text-center mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-card">
+                            <h5 class="text-muted">
+                                <i class="fas fa-user fa-fw me-2 text-primary"></i>Usuarios Registrados
+                            </h5>
+                            <h2 class="text-primary fw-bold">@Model.TotalUsuarios</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-card">
+                            <h5 class="text-muted">
+                                <i class="fas fa-newspaper fa-fw me-2 text-success"></i>Artículos Publicados
+                            </h5>
+                            <h2 class="text-success fw-bold">@Model.TotalArticulos</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Artículos -->
+                <h4 class="section-title text-secondary mt-4 mb-3">
+                    <i class="fas fa-file-alt me-2"></i>Artículos Publicados
+                </h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered align-middle">
+                        <thead class="table-dark text-center">
+                            <tr class="table-dark">
+                                <th>Titulo</th>
+                                <th>Descripción</th>
+                                <th>Fecha de Publicación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var articulo in Model.Articulos)
+                            {
+                                <tr>
+                                    <th>@articulo.Nombre</th>
+                                    <td>@articulo.Descripcion</td>
+                                    <td>@articulo.FechaCreacion</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Usuarios -->
+                <h4 class="section-title text-secondary mt-5 mb-3">
+                    <i class="fas fa-users me-2"></i>Usuarios Registrados
+                </h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered align-middle">
+                        <thead class="table-dark text-center">
+                            <tr class="table-dark">
+                                <th>Nombre</th>
+                                <th>País</th>
+                                <th>Dirección</th>
+                                <th>Ciudad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in Model.Usuarios)
+                            {
+                                <tr>
+                                    <td>@usuario.Nombre</td>
+                                    <td>@usuario.Pais</td>
+                                    <td>@usuario.Direccion</td>
+                                    <td>@usuario.Ciudad</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
